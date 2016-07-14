@@ -14,6 +14,13 @@ class MdHtml
     end
   end
 
+  def self.convert_italic(markdown)
+    markdown.gsub(/\*{1}(\w|\s)+\*{1}|_{1}(\w|\s)+_{1}/) do |italic|
+      content = italic_content italic
+      "<em>#{content}</em>"
+    end
+  end
+
   private
     def self.header_weight(header)
       weight = 0
@@ -33,5 +40,9 @@ class MdHtml
 
     def self.strong_content(strong)
       strong.gsub(/\*{2}|_{2}/, '')
+    end
+
+    def self.italic_content(italic)
+      italic.gsub(/\*{1}|_{1}/, '')
     end
 end
