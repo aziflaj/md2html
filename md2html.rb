@@ -1,4 +1,4 @@
-require './helpers'
+require './md_html'
 
 if ARGV.count != 2
   puts "Usage: ruby md2html.rb <markdown> <html>"
@@ -10,11 +10,8 @@ end
 
 # md_file = File.open(md_filename)
 md_file = IO.read(md_filename)
-md_file.gsub!(/^\#{1,6}.*$/i) do |header|
-  weight = header_weight header
-  content = header_content header
-  "<h#{weight}>#{content}</h#{weight}>"
-end
+md_file = MdHtml.convert_headers md_file
+md_file = MdHtml.convert_strong md_file
 
 # html_file = File.open(html_filename, "w")
 
