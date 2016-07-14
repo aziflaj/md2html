@@ -13,6 +13,7 @@ md_file = IO.read(md_filename)
 md_file = MdHtml.convert_headers md_file
 md_file = MdHtml.convert_strong md_file
 md_file = MdHtml.convert_italic md_file
+md_file = MdHtml.convert_code md_file
 
 # html_file = File.open(html_filename, "w")
 

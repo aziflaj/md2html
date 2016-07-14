@@ -1,5 +1,5 @@
 Headers: ^#{1,6}.*$ [done]
 Bold: \*{2}.*\*{2}|_{2}.*_{2} [done]
-Italic: \*{1}(\w|\s)+\*{1}|_{1}(\w|\s)+_{1}
+Italic: \*{1}(\w|\s)+\*{1}|_{1}(\w|\s)+_{1} [done]
 Strikethrough: ~(\w|\s)+~
-Inline Code: `(\w|\s)+`
+Inline Code: `(\w|\s)+` [done]

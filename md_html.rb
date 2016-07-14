@@ -21,6 +21,13 @@ class MdHtml
     end
   end
 
+  def self.convert_code(markdown)
+    markdown.gsub(/`(\w|\s)+`/) do |code|
+      content = code_content code
+      "<code>#{content}</code>"
+    end
+  end
+
   private
     def self.header_weight(header)
       weight = 0
@@ -44,5 +51,9 @@ class MdHtml
 
     def self.italic_content(italic)
       italic.gsub(/\*{1}|_{1}/, '')
+    end
+
+    def self.code_content(code)
+      code.gsub(/`/, '')
     end
 end
