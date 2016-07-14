@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ruby md2html.rb testfile.md output.html
