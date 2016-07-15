@@ -4,7 +4,8 @@ class MdHtml
     markdown = convert_strong markdown
     markdown = convert_italic markdown
     markdown = convert_code markdown
-    return <<-HTML
+    markdown = convert_codeblock markdown
+    <<-HTML
       <html>
       <head>
         <title>md2html by Aldo Ziflaj</title>
@@ -50,6 +51,14 @@ class MdHtml
       markdown.gsub(/`(\w|\s)+`/) do |code|
         content = code.gsub(/`/, '')
         "<code>#{content}</code>"
+      end
+    end
+
+    def convert_codeblock(markdown)
+      markdown.gsub(/```\w*(.*(\r\n|\r|\n))+```/) do |code|
+        lang = code.match(/```\w+/)[0].gsub(/`/, '')
+        content = code.gsub(/```\w+/, '```').gsub(/`/, '')
+        "<pre class=\"#{lang}\"><code>#{content}</code></pre>"
       end
     end
 end
