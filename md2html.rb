@@ -3,6 +3,7 @@ class MdHtml
     markdown = convert_headers markdown
     markdown = convert_strong markdown
     markdown = convert_italic markdown
+    markdown = convert_strikethrough markdown
     markdown = convert_code markdown
     markdown = convert_codeblock markdown
     <<-HTML
@@ -44,6 +45,13 @@ class MdHtml
       markdown.gsub(/\*{1}(\w|\s)+\*{1}|_{1}(\w|\s)+_{1}/) do |italic|
         content = italic.gsub(/\*{1}|_{1}/, '')
         "<em>#{content}</em>"
+      end
+    end
+
+    def convert_strikethrough(markdown)
+      markdown.gsub(/~(\w|\s)+~/) do |strike|
+        content = strike.gsub(/~/, '')
+        "<strike>#{content}</strike>"
       end
     end
 
