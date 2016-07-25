@@ -6,6 +6,7 @@ class MdHtml
     markdown = convert_strikethrough markdown
     markdown = convert_code markdown
     markdown = convert_codeblock markdown
+    markdown = convert_links markdown
     <<-HTML
       <html>
       <head>
@@ -67,6 +68,14 @@ class MdHtml
         lang = code.match(/```\w+/)[0].gsub(/`/, '')
         content = code.gsub(/```\w+/, '```').gsub(/`/, '')
         "<pre class=\"#{lang}\"><code>#{content}</code></pre>"
+      end
+    end
+
+    def convert_links(markdown)
+      markdown.gsub(/\[(\w|\s)+\]\((\w|\W)+\)/) do |anchor|
+        link_text = anchor.match(/\[(\w|\s)+\]/)[0].gsub(/[\[\]]/, '')
+        href = anchor.match(/\((\w|\W)+\)/)[0].gsub(/\(|\)/, '')
+        "<a href=\"#{href}\">#{link_text}</a>"
       end
     end
 end
