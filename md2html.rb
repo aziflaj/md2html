@@ -7,7 +7,9 @@ class MdHtml
     markdown = convert_code markdown
     markdown = convert_codeblock markdown
     markdown = convert_links markdown
-    <<-HTML
+    markdown = convert_lists markdown
+    # markdown = convert_ordered_lists markdown
+    """
       <html>
       <head>
         <title>md2html by Aldo Ziflaj</title>
@@ -16,7 +18,7 @@ class MdHtml
         #{markdown}
       </body>
       </html>
-    HTML
+    """
   end
 
   private
@@ -76,6 +78,16 @@ class MdHtml
         link_text = anchor.match(/\[(\w|\s)+\]/)[0].gsub(/[\[\]]/, '')
         href = anchor.match(/\((\w|\W)+\)/)[0].gsub(/\(|\)/, '')
         "<a href=\"#{href}\">#{link_text}</a>"
+      end
+    end
+
+    def convert_lists(markdown)
+      markdown.gsub(/(\-.+(\r|\n|\r\n))+/) do |list|
+        items = "<ul>\n"
+        list.gsub(/\-.+/) do |li|
+          items << "<li>#{li.sub(/^\-/, '').strip}</li>\n"
+        end
+        items << "</ul>\n"
       end
     end
 end

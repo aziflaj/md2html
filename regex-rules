@@ -4,3 +4,4 @@ Italic: \*{1}(\w|\s)+\*{1}|_{1}(\w|\s)+_{1} [done]
 Strikethrough: ~(\w|\s)+~
 Inline Code: `(\w|\s)+` [done]
 Multiline Code: ```\w*(.*(\r\n|\r|\n))+```
+Links: /\[(\w|\s)+\]\((\w|\W)+\)/
