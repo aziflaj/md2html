@@ -8,7 +8,7 @@ class MdHtml
     markdown = convert_codeblock markdown
     markdown = convert_links markdown
     markdown = convert_lists markdown
-    # markdown = convert_ordered_lists markdown
+    markdown = convert_ordered_lists markdown
     """
       <html>
       <head>
@@ -88,6 +88,16 @@ class MdHtml
           items << "<li>#{li.sub(/^\-/, '').strip}</li>\n"
         end
         items << "</ul>\n"
+      end
+    end
+
+    def convert_ordered_lists(markdown)
+      markdown.gsub(/(\d\..+(\r|\n|\r\n))+/) do |list|
+        items = "<ol>\n"
+        list.gsub(/\d.+/) do |li|
+          items << "<li>#{li.sub(/^\d\./, '').strip}</li>\n"
+        end
+        items << "</ol>\n"
       end
     end
 end
