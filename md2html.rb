@@ -25,12 +25,9 @@ class MdHtml
     def convert_headers(markdown)
       markdown.gsub(/^\#{1,6}.*$/) do |header|
         weight = 0
-        header.split("").each do |char|
-          if char == '#'
-            weight += 1
-          else
-            break
-          end
+        header.split('').each do |char|
+          break unless char == '#'
+          weight += 1
         end
         content = header.sub(/^\#{1,6}/, '')
         "<h#{weight}>#{content}</h#{weight}>"
