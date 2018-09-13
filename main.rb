@@ -8,7 +8,6 @@ end
 md_filename, html_filename = ARGV
 md_content = IO.read(md_filename)
 
-md_html_converter = MdHtml.new
-html_content = md_html_converter.to_html md_content
+html_content = MdHtml.new(md_content).to_html
 
 File.open(html_filename, "w") {|file| file.write html_content}
